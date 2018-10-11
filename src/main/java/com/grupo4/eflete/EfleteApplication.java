@@ -13,11 +13,6 @@ public class EfleteApplication {
     private static PaqueteRepository paqueteRepository;
 
 	public static void main(String[] args) {
-
-        Paquete paquete = new Paquete();
-        paquete.setEsFragil(true);
-        paqueteRepository.save(paquete);
-
 		SpringApplication.run(EfleteApplication.class, args);
 	}
 }
