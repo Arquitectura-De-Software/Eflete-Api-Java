@@ -1,0 +1,1 @@
+create database IF NOT EXISTS db_eflete;
