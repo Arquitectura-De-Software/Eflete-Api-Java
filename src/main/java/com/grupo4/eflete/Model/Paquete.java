@@ -21,6 +21,9 @@ public class Paquete implements Serializable {
     @NotNull
     private double peso;
 
+    public Paquete() {
+    }
+
     public Paquete(@NotNull boolean esFragil, @NotNull double ancho, @NotNull double alto, @NotNull double profundidad, @NotNull double peso) {
         this.esFragil = esFragil;
         this.ancho = ancho;

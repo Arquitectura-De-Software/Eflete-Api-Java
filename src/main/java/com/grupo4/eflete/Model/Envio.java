@@ -23,6 +23,9 @@ public class Envio implements Serializable {
     )
     private List<Paquete> paquetes = new ArrayList<Paquete>();
 
+    public Envio() {
+    }
+
     public Envio(String origen, String destino) {
         this.origen = origen;
         this.destino = destino;
