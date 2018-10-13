@@ -6,7 +6,10 @@ import com.grupo4.eflete.Model.Paquete;
 import com.grupo4.eflete.Repositories.EnvioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class EnvioService {
@@ -17,11 +20,10 @@ public class EnvioService {
     @Autowired
     private EstadoEnvioService estadoEnvioService;
 
-    public Envio InitializeEnvio(String origen, String destino, List<Paquete> paquetes){
-        Envio envio = new Envio(origen,destino);
+    public Envio InitializeEnvio(String origen, String destino, List<Paquete> paquetes) {
+        Envio envio = new Envio(origen, destino);
         EstadoEnvio estadoEnvio = estadoEnvioService.InitializeEstadoEnvio(origen);
-        envio.setEstadoEnvio(estadoEnvio);
-        envio.setPaquetes(paquetes);
+        envio.getEstadoEnvios().add(estadoEnvio);
         envioRepository.save(envio);
         return envio;
     }

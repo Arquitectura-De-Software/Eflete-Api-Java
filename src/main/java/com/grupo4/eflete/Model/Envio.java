@@ -1,10 +1,17 @@
 package com.grupo4.eflete.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Envio")
@@ -12,24 +19,38 @@ public class Envio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("idEnvio")
     private Long id;
+    @JsonProperty("origen")
     private String origen;
+    @JsonProperty("destino")
     private String destino;
-    private REFRIGERACION refrigeracion;
-    private EstadoEnvio estadoEnvio;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Paquete> paquetes = new ArrayList<Paquete>();
+    @JsonProperty("refrigeracion")
+    private Refrigeracion refrigeracion;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "fk_estado_actual")
+    private EstadoEnvio estadoActual;
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "fk_envios_estados")
+    private List<EstadoEnvio> estadoEnvios = new ArrayList<>();
 
+
+
+
+
+    //    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    @JsonManagedReference("paquetes")
+//    private List<Paquete> paquetes = new ArrayList<Paquete>();
     public Envio() {
     }
 
     public Envio(String origen, String destino) {
         this.origen = origen;
         this.destino = destino;
-        this.refrigeracion = REFRIGERACION.Ninguno;
+        this.refrigeracion = Refrigeracion.NIGUNA;
     }
 
     public Long getId() {
@@ -56,27 +77,38 @@ public class Envio implements Serializable {
         this.destino = destino;
     }
 
-    public REFRIGERACION getRefrigeracion() {
+    public Refrigeracion getRefrigeracion() {
         return refrigeracion;
     }
 
-    public void setRefrigeracion(REFRIGERACION refrigeracion) {
+    public void setRefrigeracion(Refrigeracion refrigeracion) {
         this.refrigeracion = refrigeracion;
     }
 
-    public List<Paquete> getPaquetes() {
+    public List<EstadoEnvio> getEstadoEnvios() {
+        return estadoEnvios;
+    }
+
+    public void setEstadoEnvios(List<EstadoEnvio> estadoEnvios) {
+        this.estadoEnvios = estadoEnvios;
+    }
+
+    public EstadoEnvio getEstadoActual() {
+        return estadoActual;
+    }
+
+    public void setEstadoActual(EstadoEnvio estadoActual) {
+        this.estadoActual = estadoActual;
+        this.getEstadoEnvios().add(estadoActual);
+    }
+
+    /*    public List<Paquete> getPaquetes() {
         return paquetes;
-    }
+    }*/
 
-    public void setPaquetes(List<Paquete> paquetes) {
-        this.paquetes = paquetes;
-    }
+//    public void setPaquetes(List<Paquete> paquetes) {
+//        this.paquetes = paquetes;
+//    }
 
-    public EstadoEnvio getEstadoEnvio() {
-        return estadoEnvio;
-    }
 
-    public void setEstadoEnvio(EstadoEnvio estadoEnvio) {
-        this.estadoEnvio = estadoEnvio;
-    }
 }

@@ -27,13 +27,5 @@ public class MainApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        Paquete paquete = new Paquete(false, 5.5,6.0,1.5,15);
-        List<Paquete> paquetes = new ArrayList<Paquete>();
-        paquetes.add(paquete);
-
-        Envio envio = new Envio("Buenos Aires","Cordoba");
-        envio.setPaquetes(paquetes);
-        envioRepository.save(envio);
     }
 }
