@@ -45,7 +45,7 @@ public class Envio implements Serializable {
     public Envio(String origen, String destino) {
         this.origen = origen;
         this.destino = destino;
-        this.refrigeracion = Refrigeracion.NIGUNA;
+        this.refrigeracion = Refrigeracion.NINGUNA;
     }
 
     public Long getId() {
