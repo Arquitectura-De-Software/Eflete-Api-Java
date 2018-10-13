@@ -38,11 +38,11 @@ public class EnvioController {
 
         envioRepository.updateEstadoActual(lastId, savedEnvio.getId());
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/")
                 .buildAndExpand(savedEnvio.getId()).toUri();
 
-        return ResponseEntity.created(location).build();
 
+        return ResponseEntity.ok(savedEnvio);
     }
 
 
