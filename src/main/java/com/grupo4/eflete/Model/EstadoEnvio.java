@@ -49,4 +49,8 @@ public class EstadoEnvio implements Serializable {
     public void setEnvio(Envio envio) {
         this.envio = envio;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
