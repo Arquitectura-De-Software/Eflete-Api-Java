@@ -31,26 +31,7 @@ public class EnvioController {
 
     @GetMapping("/envios/{id}")
     public EnvioDTO getEnvioById(@PathVariable Long id) {
-
-        Envio getEnvio = envioRepository.getOne(id);
-        EstadoEnvio estado = getEnvio.getEstadoActual();
-        EnvioDTO envioDTO = new EnvioDTO();
-        envioDTO.setOrigen(getEnvio.getOrigen());
-        envioDTO.setDestino(getEnvio.getDestino());
-        envioDTO.setEstadoActual(modelMapper.map(estado, EstadoEnvioDto.class));
-        envioDTO.setRefrigeracion(getEnvio.getRefrigeracion());
-        envioDTO.setId(getEnvio.getId());
-
-        List<EstadoEnvioDto> estados = new ArrayList<>();
-
-        getEnvio.getEstadoEnvios().forEach(est -> {
-            EstadoEnvioDto edto = modelMapper.map(est, EstadoEnvioDto.class);
-            estados.add(edto);
-        });
-
-        envioDTO.setEstadoEnvios(estados);
-        return envioDTO;
-
+        return modelMapper.map(envioRepository.getOne(id), EnvioDTO.class);
     }
 
     @PostMapping("/envios")
