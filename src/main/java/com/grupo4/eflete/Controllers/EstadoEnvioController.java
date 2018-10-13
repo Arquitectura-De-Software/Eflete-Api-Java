@@ -26,7 +26,7 @@ public class EstadoEnvioController {
     }
 
     @PostMapping("/estadoenvios/{idEnvio}")
-    public ResponseEntity<Envio> createEstadoEnvio(@RequestBody EstadoEnvio estadoEnvio, @PathVariable Long idEnvio) {
+    @ResponseBody public ResponseEntity<Envio> createEstadoEnvio(@RequestBody EstadoEnvio estadoEnvio, @PathVariable Long idEnvio) {
         Envio getEnvio = envioRepository.getOne(idEnvio);
         estadoEnvio.setEnvio(getEnvio);
         EstadoEnvio savedEstado = estadoEnvioRepository.save(estadoEnvio);

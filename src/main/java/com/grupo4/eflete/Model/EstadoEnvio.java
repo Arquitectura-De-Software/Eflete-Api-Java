@@ -26,6 +26,11 @@ public class EstadoEnvio implements Serializable {
     public EstadoEnvio() {
     }
 
+    public EstadoEnvio(String ubicacion) {
+        this.codigoestadoenvio = CodigoEstadoEnvio.INICIADO;
+        this.ubicacion = ubicacion;
+    }
+
     public String getUbicacion() {
         return ubicacion;
     }
