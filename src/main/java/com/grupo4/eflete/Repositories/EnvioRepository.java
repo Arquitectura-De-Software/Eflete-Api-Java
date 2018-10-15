@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface EnvioRepository extends JpaRepository<Envio, Long> {
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(value ="update envio e set e.fk_estado_actual = ?1 where e.id = ?2", nativeQuery = true)
     void updateEstadoActual(long idEstadoActual, long idEstado);
 }

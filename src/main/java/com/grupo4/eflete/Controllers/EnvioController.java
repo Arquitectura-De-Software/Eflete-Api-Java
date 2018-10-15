@@ -10,6 +10,7 @@ import com.grupo4.eflete.dtos.EstadoEnvioDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -38,18 +39,18 @@ public class EnvioController {
     @ResponseBody public ResponseEntity<EnvioDTO> createEnvio(@RequestBody Envio envio) {
         Envio savedEnvio = envioRepository.save(envio);
 
-        estadoEnvioRepository.saveEstadoInicial(savedEnvio.getOrigen(), CodigoEstadoEnvio.INICIADO.ordinal(), savedEnvio.getId());
-        Long lastId = estadoEnvioRepository.getLastId();
+        updateEstadoActual(savedEnvio);
 
-        envioRepository.updateEstadoActual(lastId, savedEnvio.getId());
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/")
-                .buildAndExpand(savedEnvio.getId()).toUri();
-
-        EnvioDTO envioDTO = modelMapper.map(savedEnvio, EnvioDTO.class);
-
+        EnvioDTO envioDTO = modelMapper.map(envioRepository.getOne(envio.getId()), EnvioDTO.class);
 
         return ResponseEntity.ok(envioDTO);
+    }
+
+    @Transactional
+    void updateEstadoActual(Envio envio){
+        estadoEnvioRepository.saveEstadoInicial(envio.getOrigen(), CodigoEstadoEnvio.INICIADO.ordinal(), envio.getId());
+        Long lastId = estadoEnvioRepository.getLastId();
+        envioRepository.updateEstadoActual(lastId, envio.getId());
     }
 
 
