@@ -8,19 +8,19 @@ public class EnvioDTO {
     private Long id;
     private String origen;
     private String destino;
-    EstadoEnvioDTO estadoActual;
+    private Long idEstadoActual;
     private Refrigeracion refrigeracion;
     private List<EstadoEnvioDTO> estadoEnvios;
 
     public EnvioDTO() {
     }
 
-    public EstadoEnvioDTO getEstadoActual() {
-        return estadoActual;
+    public Long getIdEstadoActual() {
+        return idEstadoActual;
     }
 
-    public void setEstadoActual(EstadoEnvioDTO estadoActual) {
-        this.estadoActual = estadoActual;
+    public void setIdEstadoActual(Long idEstadoActual) {
+        this.idEstadoActual = idEstadoActual;
     }
 
     public Refrigeracion getRefrigeracion() {

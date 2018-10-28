@@ -11,6 +11,11 @@ public class EstadoEnvioDTO {
     public EstadoEnvioDTO() {
     }
 
+    public EstadoEnvioDTO(String ubicacion) {
+        this.ubicacion = ubicacion;
+        this.codigoEstadoEnvio = CodigoEstadoEnvio.INICIADO;
+    }
+
     public Long getId() {
         return id;
     }

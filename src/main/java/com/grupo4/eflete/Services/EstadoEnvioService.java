@@ -1,5 +1,6 @@
 package com.grupo4.eflete.Services;
 
+import com.grupo4.eflete.Helpers.Converter;
 import com.grupo4.eflete.Model.CodigoEstadoEnvio;
 import com.grupo4.eflete.Model.Envio;
 import com.grupo4.eflete.Model.EstadoEnvio;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EstadoEnvioService {
 
-    private ModelMapper modelMapper = new ModelMapper();
+    private Converter converter = new Converter();
 
     @Autowired
     private EstadoEnvioRepository estadoEnvioRepository;
@@ -20,11 +21,14 @@ public class EstadoEnvioService {
     @Autowired
     private EnvioService envioService;
 
-
+    public void setEstadoEnvioInicialParaEnvio(Envio envio){
+        EstadoEnvioDTO estadoEnvioDTO = new EstadoEnvioDTO(envio.getOrigen());
+        setEstadoEnvioToEnvioByDTOAndId(estadoEnvioDTO, envio.getId());
+    }
 
     public EstadoEnvioDTO getEstadoEnvioDTOById(long idEstadoEnvio){
         EstadoEnvio estadoEnvio = estadoEnvioRepository.getOne(idEstadoEnvio);
-        return modelMapper.map(estadoEnvio, EstadoEnvioDTO.class);
+        return converter.map(estadoEnvio, EstadoEnvioDTO.class);
     }
 
     public EstadoEnvioDTO setEstadoEnvioToEnvioByDTOAndId(EstadoEnvioDTO estadoEnvioDTO, long idEnvio){
@@ -33,6 +37,6 @@ public class EstadoEnvioService {
         estadoEnvio.setEnvio(envio);
         estadoEnvioRepository.save(estadoEnvio);
         envioService.saveNewEstadoEnvio(envio, estadoEnvio);
-        return modelMapper.map(estadoEnvio, EstadoEnvioDTO.class);
+        return converter.map(estadoEnvio, EstadoEnvioDTO.class);
     }
 }
