@@ -29,9 +29,11 @@ public class Envio implements Serializable {
     private List<EstadoEnvio> estadoEnvios = new ArrayList<>();
 
     public Envio() {
+        this.estadoEnvios = new ArrayList<>();
     }
 
     public Envio(String origen, String destino, Refrigeracion refrigeracion) {
+        this.estadoEnvios = new ArrayList<>();
         this.origen = origen;
         this.destino = destino;
         this.refrigeracion = refrigeracion;

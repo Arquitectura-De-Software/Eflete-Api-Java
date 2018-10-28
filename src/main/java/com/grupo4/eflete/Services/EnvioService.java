@@ -6,6 +6,7 @@ import com.grupo4.eflete.Model.EstadoEnvio;
 import com.grupo4.eflete.Model.Paquete;
 import com.grupo4.eflete.Repositories.EnvioRepository;
 import com.grupo4.eflete.dtos.EnvioDTO;
+import com.grupo4.eflete.dtos.EstadoEnvioDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,8 @@ public class EnvioService {
         Envio savedEnvio = new Envio(envioDTO.getOrigen(), envioDTO.getDestino(), envioDTO.getRefrigeracion());
         envioRepository.save(savedEnvio);
         estadoEnvioService.setEstadoEnvioInicialParaEnvio(savedEnvio);
-        envioDTO.setIdEstadoActual(savedEnvio.getEstadoActual().getId());
+        envioDTO.setId(savedEnvio.getId());
+        envioDTO.setEstadoActual(converter.map(savedEnvio.getEstadoActual(), EstadoEnvioDTO.class));
         return envioDTO;
     }
 
