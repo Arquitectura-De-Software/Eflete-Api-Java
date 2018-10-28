@@ -1,7 +1,5 @@
 package com.grupo4.eflete.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,13 +8,9 @@ import java.io.Serializable;
 public class EstadoEnvio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private Long id;
-    @JsonProperty("CodigoEstadoEnvio")
     private CodigoEstadoEnvio codigoestadoenvio;
-    @JsonProperty("ubicacion")
     private String ubicacion;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_envios_estados")
     private Envio envio;
@@ -26,8 +20,8 @@ public class EstadoEnvio implements Serializable {
     public EstadoEnvio() {
     }
 
-    public EstadoEnvio(String ubicacion) {
-        this.codigoestadoenvio = CodigoEstadoEnvio.INICIADO;
+    public EstadoEnvio(String ubicacion, CodigoEstadoEnvio codigo) {
+        this.codigoestadoenvio = codigo;
         this.ubicacion = ubicacion;
     }
 

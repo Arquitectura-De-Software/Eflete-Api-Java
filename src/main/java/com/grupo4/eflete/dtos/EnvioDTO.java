@@ -1,6 +1,5 @@
 package com.grupo4.eflete.dtos;
 
-import com.grupo4.eflete.Model.CodigoEstadoEnvio;
 import com.grupo4.eflete.Model.Refrigeracion;
 
 import java.util.List;
@@ -9,18 +8,18 @@ public class EnvioDTO {
     private Long id;
     private String origen;
     private String destino;
-    EstadoEnvioDto estadoActual;
+    EstadoEnvioDTO estadoActual;
     private Refrigeracion refrigeracion;
-    private List<EstadoEnvioDto> estadoEnvios;
+    private List<EstadoEnvioDTO> estadoEnvios;
 
     public EnvioDTO() {
     }
 
-    public EstadoEnvioDto getEstadoActual() {
+    public EstadoEnvioDTO getEstadoActual() {
         return estadoActual;
     }
 
-    public void setEstadoActual(EstadoEnvioDto estadoActual) {
+    public void setEstadoActual(EstadoEnvioDTO estadoActual) {
         this.estadoActual = estadoActual;
     }
 
@@ -56,11 +55,11 @@ public class EnvioDTO {
         this.destino = destino;
     }
 
-    public List<EstadoEnvioDto> getEstadoEnvios() {
+    public List<EstadoEnvioDTO> getEstadoEnvios() {
         return estadoEnvios;
     }
 
-    public void setEstadoEnvios(List<EstadoEnvioDto> estadoEnvios) {
+    public void setEstadoEnvios(List<EstadoEnvioDTO> estadoEnvios) {
         this.estadoEnvios = estadoEnvios;
     }
 }

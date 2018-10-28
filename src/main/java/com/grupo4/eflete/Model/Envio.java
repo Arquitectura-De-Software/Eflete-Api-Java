@@ -15,13 +15,9 @@ public class Envio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("idEnvio")
     private Long id;
-    @JsonProperty("origen")
     private String origen;
-    @JsonProperty("destino")
     private String destino;
-    @JsonProperty("refrigeracion")
     private Refrigeracion refrigeracion;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
@@ -32,20 +28,13 @@ public class Envio implements Serializable {
     @JoinColumn(name = "fk_envios_estados")
     private List<EstadoEnvio> estadoEnvios = new ArrayList<>();
 
-
-    //    @OneToMany(
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    @JsonManagedReference("paquetes")
-//    private List<Paquete> paquetes = new ArrayList<Paquete>();
     public Envio() {
     }
 
-    public Envio(String origen, String destino) {
+    public Envio(String origen, String destino, Refrigeracion refrigeracion) {
         this.origen = origen;
         this.destino = destino;
-        this.refrigeracion = Refrigeracion.NINGUNA;
+        this.refrigeracion = refrigeracion;
     }
 
     public Long getId() {
@@ -96,14 +85,5 @@ public class Envio implements Serializable {
         this.estadoActual = estadoActual;
         this.getEstadoEnvios().add(estadoActual);
     }
-
-    /*    public List<Paquete> getPaquetes() {
-        return paquetes;
-    }*/
-
-//    public void setPaquetes(List<Paquete> paquetes) {
-//        this.paquetes = paquetes;
-//    }
-
 
 }
